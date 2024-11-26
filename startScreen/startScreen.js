@@ -5,18 +5,13 @@ export default class StartScreen {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.button = new Button(170, 150, 250, 60, "Start Game");
+    this.button = new StartButton(170, 150, 250, 60, "Start Game");
   }
 
   draw() {
-    // fill
-    // rect
+    fill(255, 200, 100);
+    rect(100, 100, 200, 200);
     this.button.draw();
-    if (MouseIsPressed) {
-      if (this.button.hitTest(mouseX, mouseY)) {
-        background(200);
-      }
-    }
   }
 }
 
@@ -26,5 +21,5 @@ function setup() {
   createCanvas(500, 500);
 }
 
-window.setup = setup;
-window.draw = draw;
+// window.setup = setup;
+// window.draw = draw;

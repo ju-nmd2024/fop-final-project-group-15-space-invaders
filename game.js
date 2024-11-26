@@ -29,7 +29,7 @@ let startScreen = new StartScreen(0, 0);
 
 function draw() {
   if (state === "start") {
-    startScreen.draw(100, 100);
+    startScreen.draw();
     //   } else if (state === "instructions") {
     //     rulesScreen();
     //   } else if (state === "playGame") {
