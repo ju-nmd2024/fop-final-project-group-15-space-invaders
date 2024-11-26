@@ -1,4 +1,9 @@
+import Button from "./button.js";
+import rulesButton from "./rulesButton.js";
+
 let state = "start";
+
+const myButton = new Button(100, 100, 260, 70, "Start Game");
 
 function setup() {
   createCanvas(800, 600);
@@ -6,6 +11,11 @@ function setup() {
 
 function startScreen() {
   background(0, 140, 0);
+  myButton.draw();
+}
+
+function rulesScreen() {
+  background(0, 0, 0);
 }
 
 function gameScreen() {
@@ -22,6 +32,8 @@ function gameOverScreen() {
 function draw() {
   if (state === "start") {
     startScreen();
+  } else if (state === "instructions") {
+    rulesScreen();
   } else if (state === "playGame") {
     gameScreen();
   } else if (state === "gameOver") {

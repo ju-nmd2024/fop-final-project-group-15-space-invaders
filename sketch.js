@@ -1,25 +1,25 @@
 import Button from "./button.js";
-import BlueButton from "./blueButton.js";
+import rulesButtonButton from "./rulesButton.js";
 
 function setup() {
   createCanvas(500, 550);
 }
 window.setup = setup;
 
-const myButton = new Button(100, 100, 160, 60, "Hello");
-const worldButton = new BlueButton(100, 300, 260, 60, "World");
+const myButton = new Button(100, 100, 160, 60, "Start Game");
+const rulesButton = new rulesButton(100, 300, 260, 60, "Instructions");
 
 function draw() {
   background(255);
   if (mouseIsPressed) {
     if (myButton.hitTest(mouseX, mouseY)) {
-      background(255, 0, 0);
-    } else if (worldButton.hitTest(mouseX, mouseY)) {
-      background(0, 255, 0);
+      startScreen();
+    } else if (rulesButton.hitTest(mouseX, mouseY)) {
+      rulesScreen();
     }
   }
 
   myButton.draw();
-  worldButton.draw();
+  rulesButton.draw();
 }
 window.draw = draw;
