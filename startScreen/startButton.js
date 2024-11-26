@@ -1,27 +1,27 @@
-export default class Button {
+export default class StartButton {
   constructor(x, y, width, height, text) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
     this.text = text;
-    this.backgroundColour = "#cccccc";
+    this.buttonFillColour = (255, 255, 0);
+    this.buttonStrokeColour = (0, 255, 255);
   }
 
-  //Färger med hexkod
   draw() {
     push();
     translate(this.x, this.y);
-    stroke("#4d4d4d");
-    strokeWeight(4);
-    fill(this.backgroundColour);
+    stroke(this.buttonStrokeColour);
+    strokeWeight(5);
+    fill(this.buttonFillColour);
     rect(0, 0, this.width, this.height, this.height / 2);
 
-    // Define text
+    //Text
     noStroke();
-    fill("4d4d4d");
+    fill(255);
     textSize(this.height / 2);
-    textAlign(CENTER);
+    textalign(CENTER);
     text(this.text, 0, this.height / 4, this.width);
     pop();
   }
