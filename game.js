@@ -1,7 +1,9 @@
 import StartScreen from "./startScreen/startScreen.js";
+import InstructionScreen from "./instructionsScreen/instructionScreen.js";
 
-let state = "start";
+let state = "instructions";
 let startScreen = new StartScreen(0, 0);
+let instructionScreen = new InstructionScreen(0, 0);
 
 function preload() {}
 window.preload = preload;
@@ -33,16 +35,20 @@ window.setup = setup;
 function draw() {
   if (state === "start") {
     startScreen.draw();
-    //   } else if (state === "instructions") {
-    //     rulesScreen();
-    //   } else if (state === "playGame") {
-    //     gameScreen();
-    //   } else if (state === "gameOver") {
-    //     gameOverScreen();
-    //   } else if (state === "youWin") {
-    //     youWinScreen();
+  } else if (state === "instructions") {
+    instructionScreen.draw();
   }
+
+  //   } else if (state === "instructions") {
+  //     rulesScreen();
+  //   } else if (state === "playGame") {
+  //     gameScreen();
+  //   } else if (state === "gameOver") {
+  //     gameOverScreen();
+  //   } else if (state === "youWin") {
+  //     youWinScreen();
 }
+
 window.draw = draw;
 
 // function mouseClicked() {
