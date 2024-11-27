@@ -1,10 +1,15 @@
-import StartScreen from "./startScreen";
+import StartScreen from "./startScreen/startScreen.js";
 
 let state = "start";
+let startScreen = new StartScreen(0, 0);
 
-// function setup() {
-//   createCanvas(800, 600);
-// }
+function preload() {}
+window.preload = preload;
+
+function setup() {
+  createCanvas(innerWidth, innerHeight);
+}
+window.setup = setup;
 
 // function startScreen() {
 //   background(0, 140, 0);
@@ -25,8 +30,6 @@ let state = "start";
 //   background(255, 0, 140);
 // }
 
-let startScreen = new StartScreen(0, 0);
-
 function draw() {
   if (state === "start") {
     startScreen.draw();
@@ -40,6 +43,7 @@ function draw() {
     //     youWinScreen();
   }
 }
+window.draw = draw;
 
 // function mouseClicked() {
 //   if (state === "start") {

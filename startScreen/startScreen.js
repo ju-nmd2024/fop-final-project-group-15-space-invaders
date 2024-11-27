@@ -1,25 +1,39 @@
 //Alva Norberg
-import StartButton from "./startButton";
+import StartButton from "./startButton.js";
+import InstructionsButton from "./instructionsButton.js";
 
 export default class StartScreen {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.button = new StartButton(170, 150, 250, 60, "Start Game");
+    this.startButton = new StartButton(
+      innerWidth / 2.5,
+      innerHeight / 2.5,
+      250,
+      60,
+      "Start Game"
+    );
+    this.instructionsButton = new InstructionsButton(
+      innerWidth / 2.5,
+      innerHeight / 1.85,
+      250,
+      60,
+      "Instructions"
+    );
   }
 
   draw() {
-    fill(255, 200, 100);
-    rect(100, 100, 200, 200);
-    this.button.draw();
+    background(0, 0, 0);
+    this.startButton.draw();
+    this.instructionsButton.draw();
   }
 }
 
-const startScreen = new StartScreen(0, 0);
+// const startScreen = new StartScreen(0, 0);
 
-function setup() {
-  createCanvas(500, 500);
-}
+// function setup() {
+//   createCanvas(500, 500);
+// }
 
 // window.setup = setup;
 // window.draw = draw;

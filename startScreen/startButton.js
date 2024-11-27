@@ -21,7 +21,7 @@ export default class StartButton {
     noStroke();
     fill(255);
     textSize(this.height / 2);
-    textalign(CENTER);
+    textAlign(CENTER);
     text(this.text, 0, this.height / 4, this.width);
     pop();
   }
