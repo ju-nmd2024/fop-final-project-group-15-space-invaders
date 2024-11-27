@@ -9,13 +9,20 @@ export default class GameInstructions {
 
   draw() {
     push();
-    translate();
+    translate(this.x, this.y);
+
+    //Box
     noFill();
     stroke(255);
     strokeWeight(6);
     rect(0, 0, this.height, this.width);
-    textSize(27);
-    textColour(255);
+
+    //Text
+    fill(255);
+    noStroke();
+    textAlign(CENTER);
+    textSize(22);
+    text(this.text, 50, this.y, this.height / 1.2, this.width);
     pop();
   }
 }

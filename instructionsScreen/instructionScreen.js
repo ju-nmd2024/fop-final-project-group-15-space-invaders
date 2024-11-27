@@ -1,14 +1,14 @@
-import GameInstructions from "./gameInstructionsClass";
+import GameInstructions from "./gameInstructionsClass.js";
 
 export default class InstructionScreen {
-  constructor(x, y, text) {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
     this.instructions = new GameInstructions(
-      250,
-      250,
-      250,
-      250,
+      150,
+      150,
+      550,
+      550,
       "Click Start to begin the game. To win you need to shoot down all aliens. But watch out, they shoot back. To move the spaceship you press the left arrow to run to the left and the right arrow to run to the right. To shoot the aliens you push the arrow up. you can also hide behind the planets, but watch out because they might disapear little by littel when the aliens hit the target. Good luck"
     );
   }
