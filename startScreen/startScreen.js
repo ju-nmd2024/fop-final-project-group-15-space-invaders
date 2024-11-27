@@ -18,15 +18,22 @@ export default class StartScreen {
       innerHeight / 1.85,
       250,
       60,
-      "Instructions"
-    );
-  }
+      "Instructions",
+      () => {
+        state === "instructions");
+      }
 
-  draw() {
-    background(0, 0, 0);
-    this.startButton.draw();
-    this.instructionsButton.draw();
+    draw();
+    {
+      background(0, 0, 0);
+      this.startButton.draw();
+      this.instructionsButton.draw();
+    }
   }
+}
+
+function mouseClicked() {
+  instructionsButton.mouseClicked();
 }
 
 // const startScreen = new StartScreen(0, 0);

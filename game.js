@@ -1,7 +1,7 @@
 import StartScreen from "./startScreen/startScreen.js";
 import InstructionScreen from "./instructionsScreen/instructionScreen.js";
 
-let state = "instructions";
+let state = "start";
 let startScreen = new StartScreen(0, 0);
 let instructionScreen = new InstructionScreen(0, 0);
 
@@ -32,22 +32,26 @@ window.setup = setup;
 //   background(255, 0, 140);
 // }
 
+//   if (mouseIsPressed) {
+//     if (myButton.hitTest(mouseX, mouseY)) {
+//       startScreen();
+
 function draw() {
   if (state === "start") {
     startScreen.draw();
   } else if (state === "instructions") {
     instructionScreen.draw();
   }
-
-  //   } else if (state === "instructions") {
-  //     rulesScreen();
-  //   } else if (state === "playGame") {
-  //     gameScreen();
-  //   } else if (state === "gameOver") {
-  //     gameOverScreen();
-  //   } else if (state === "youWin") {
-  //     youWinScreen();
 }
+
+//   } else if (state === "instructions") {
+//     rulesScreen();
+//   } else if (state === "playGame") {
+//     gameScreen();
+//   } else if (state === "gameOver") {
+//     gameOverScreen();
+//   } else if (state === "youWin") {
+//     youWinScreen();
 
 window.draw = draw;
 
