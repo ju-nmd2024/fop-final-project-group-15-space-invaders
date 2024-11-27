@@ -37,7 +37,7 @@ export default class StartButton {
   }
 
   mouseClicked() {
-    if (this.hitTest(mouseX, mosueY)) {
+    if (this.hitTest(mouseX, mouseY)) {
       this.callback();
     }
   }

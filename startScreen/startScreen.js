@@ -1,4 +1,4 @@
-//Alva Norberg
+//Inspired by Alva Norberg, first year NMD student
 import StartButton from "./startButton.js";
 import InstructionsButton from "./instructionsButton.js";
 
@@ -6,6 +6,7 @@ export default class StartScreen {
   constructor(x, y) {
     this.x = x;
     this.y = y;
+
     this.startButton = new StartButton(
       innerWidth / 2.5,
       innerHeight / 2.5,
@@ -20,20 +21,20 @@ export default class StartScreen {
       60,
       "Instructions",
       () => {
-        state === "instructions");
+        state = "instructions";
       }
-
-    draw();
-    {
-      background(0, 0, 0);
-      this.startButton.draw();
-      this.instructionsButton.draw();
-    }
+    );
   }
-}
 
-function mouseClicked() {
-  instructionsButton.mouseClicked();
+  draw() {
+    background(0, 0, 0);
+    this.startButton.draw();
+    this.instructionsButton.draw();
+  }
+
+  mouseClicked() {
+    this.instructionsButton.mouseClicked;
+  }
 }
 
 // const startScreen = new StartScreen(0, 0);
