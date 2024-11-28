@@ -1,9 +1,11 @@
 import StartScreen from "./startScreen/startScreen.js";
 import InstructionScreen from "./instructionsScreen/instructionScreen.js";
+import GameScreen from "./gameScreen/gameScreen.js";
 
-let state = "start";
+let state = "playGame";
 let startScreen = new StartScreen(0, 0);
 let instructionScreen = new InstructionScreen(0, 0);
+let gameScreen = new GameScreen(0, 0);
 
 function preload() {}
 window.preload = preload;
@@ -45,6 +47,8 @@ function draw() {
     startScreen.draw();
   } else if (state === "instructions") {
     instructionScreen.draw();
+  } else if (state === "playGame") {
+    gameScreen.draw();
   }
 }
 
@@ -67,4 +71,20 @@ window.draw = draw;
 //   } else if (state === "gameOver") {
 //     state = "start";
 //   }
+// }
+
+// function keyPressed() {
+//   if (keyCode === LEFT_ARROW) {
+//     snake.direction.turnLeft();
+//   }
+//   if (keyCode === RIGHT_ARROW) {
+//     snake.direction.turnRight();
+//   }
+//   if (keyCode === UP_ARROW) {
+//     snake.direction.turnUp();
+//   }
+//   if (keyCode === DOWN_ARROW) {
+//     snake.direction.turnDown();
+//   }
+//   return false;
 // }
