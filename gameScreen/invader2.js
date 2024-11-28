@@ -1,3 +1,5 @@
+import { images } from "../game.js";
+
 export default class Invader2 {
   constructor(x, y, width, height) {
     this.x = x;
@@ -5,13 +7,20 @@ export default class Invader2 {
     this.width = width;
     this.height = height;
     this.colour = (255, 255, 255);
+    this.velocity = 1;
+  }
+
+  move() {
+    this.x = this.x + this.velocity;
   }
 
   draw() {
     push();
     translate(this.x, this.y);
     fill(this.colour);
-    rect(0, 0, this.width, this.height);
+    image(images.invader2, 0, 0, 50, 50);
     pop();
+
+    this.move();
   }
 }

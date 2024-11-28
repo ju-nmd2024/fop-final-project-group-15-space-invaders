@@ -8,15 +8,15 @@ export default class StartScreen {
     this.y = y;
 
     this.startButton = new StartButton(
-      innerWidth / 2.5,
-      innerHeight / 2.5,
+      1000 / 2.5,
+      1000 / 2.5,
       250,
       60,
       "Start Game"
     );
     this.instructionsButton = new InstructionsButton(
-      innerWidth / 2.5,
-      innerHeight / 1.85,
+      1000 / 2.5,
+      1000 / 1.85,
       250,
       60,
       "Instructions",

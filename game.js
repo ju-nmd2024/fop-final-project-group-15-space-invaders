@@ -6,13 +6,19 @@ let state = "playGame";
 let startScreen = new StartScreen(0, 0);
 let instructionScreen = new InstructionScreen(0, 0);
 let gameScreen = new GameScreen(0, 0);
+export let images;
 
-function preload() {}
+function preload() {
+  images = {
+    invader1: loadImage("images/spaceinvader_mushroomalive.png"),
+    invader2: loadImage("images/spaceinvader_mushroomalive.png"),
+  };
+}
 window.preload = preload;
 
 function setup() {
   gameScreen.setup();
-  createCanvas(innerWidth, innerHeight);
+  createCanvas(1000, 1000);
 }
 window.setup = setup;
 
