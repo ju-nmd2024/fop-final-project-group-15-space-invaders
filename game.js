@@ -11,6 +11,7 @@ function preload() {}
 window.preload = preload;
 
 function setup() {
+  gameScreen.setup();
   createCanvas(innerWidth, innerHeight);
 }
 window.setup = setup;

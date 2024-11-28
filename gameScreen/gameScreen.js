@@ -1,44 +1,80 @@
-import Invader1 from "./invader.js";
+import Invader1 from "./invader1.js";
+import Invader2 from "./invader2.js";
 
 export default class GameScreen {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.invader1 = new Invader1(150, 150, 150, 150);
     this.count = 0;
-    // this.invaders = [];
+    this.invaders = [];
+    this.moveDirection = 1; // 1 for right, -1 for left
+    this.invaderSpeed = 1; // Velocity for invaders
+  }
+
+  setup() {
+    for (let x = 0; x < 8; x++) {
+      this.invaders.push(new Invader1(150 + x * 75, 150, 50, 50));
+      this.invaders.push(new Invader2(150 + x * 75, 225, 50, 50));
+    }
   }
 
   draw() {
     background(0, 0, 0);
-    while (count < 8) {
-      this.invader1.draw(count * x + 100, y, s);
-      count = count + 5;
+
+    // SAME AS THE THIS.INVADERS BELOW, which one do we prefere?
+    // for (let i = 0; i < this.invaders.length; i++) {
+    //   const invader = this.invaders[i];
+
+    //   invader.draw();
+    // }
+
+    this.invaders.forEach((invader) => {
+      invader.draw();
+    });
+
+    // Begin help from chatGTP
+    // Check if an invader has retched the edge
+    this.checkInvaderMovement();
+
+    checkInvaderMovement();
+    {
+      let edgeReched = false;
+
+      // Check if an invader has retched the edge
+      for (let invader of this.invaders) {
+        if (invader.x < 100 || invader.x > width - 100) {
+          edgeReched = true;
+          break;
+        }
+      }
+
+      // If a edge is retched, switch direction for all invaders
+      if (edgeReched) {
+        for (let invader of this.invaders) {
+          invader.velocity *= -1; // Switch direction
+          invader.y += 40; // Move down the hole row of invaders
+        }
+      }
+
+      // Update the movement for the hole group
+      this.invaders.forEach((invader) => {
+        invader.move();
+      });
+      // End help from chatGTP
     }
-    // for (let i = 0; i < 5; i++) {
-    //   this.invader1.draw(this.x + i * 100, this.y);
-    // }
-
-    // //taken from ChatGPT
-    // for (let i = 0; i < 5; i++) {
-    //   let invader = new Invader1(150, 150, 150, 150);
-    //   this.invader.push(invader);
-    // }
-    // for (let i = 0; i < this.invaders.legnth; i++) {
-    //   let invader = this.invaders[i];
-    //   invader.draw(this.x + i * 100, this.y);
-    // } //taken from ChatGPT
-
-    // for (let i = 0; i < 5; i++) {
-    //   this.invader.draw(this.x + i * 100, this.y);
-    // }
-
-    //     this.x = this.x + velocity;
-    //     if (this.x > 200) {
-    //       this.velocity = 5;
-    //     } else if (this.x < 1000) {
-    //       this.velocity = -5;
-    //     }
-    //   }
   }
+
+  // //taken from ChatGPT
+  // for (let i = 0; i < 5; i++) {
+  //   let invader = new Invader1(150, 150, 150, 150);
+  //   this.invader.push(invader);
+  // }
+  // for (let i = 0; i < this.invaders.legnth; i++) {
+  //   let invader = this.invaders[i];
+  //   invader.draw(this.x + i * 100, this.y);
+  // } //taken from ChatGPT
+
+  // for (let i = 0; i < 5; i++) {
+  //   this.invader.draw(this.x + i * 100, this.y);
+  // }
 }
