@@ -12,7 +12,10 @@ export let images;
 function preload() {
   images = {
     invader1: loadImage("images/spaceinvader_mushroomalive.png"),
-    invader2: loadImage("images/spaceinvader_mushroomalive.png"),
+    invader2: loadImage("images/Space-Invader---Purpule.png"),
+    invader3: loadImage("images/spaceinvader_octopuss.png"),
+    // invader4: loadImage()
+    // invader5: loadImage
   };
 }
 window.preload = preload;

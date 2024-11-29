@@ -1,5 +1,5 @@
-import Invader1 from "./invader1.js";
-import Invader2 from "./invader2.js";
+import { images } from "../game.js";
+import Invader from "./invader.js";
 
 export default class GameScreen {
   constructor(x, y) {
@@ -13,8 +13,15 @@ export default class GameScreen {
 
   setup() {
     for (let x = 0; x < 8; x++) {
-      this.invaders.push(new Invader1(150 + x * 75, 150, 50, 50));
-      this.invaders.push(new Invader2(150 + x * 75, 225, 50, 50));
+      this.invaders.push(
+        new Invader(150 + x * 75, 150, 50, 50, images.invader1)
+      );
+      this.invaders.push(
+        new Invader(150 + x * 75, 225, 50, 50, images.invader2)
+      );
+      this.invaders.push(
+        new Invader(150 + x * 75, 300, 50, 50, images.invader3)
+      );
     }
   }
 
@@ -59,7 +66,7 @@ export default class GameScreen {
     if (edgeReched) {
       for (let invader of this.invaders) {
         invader.velocity *= -1; // Switch direction
-        invader.y += 1; // Move down the hole row of invaders
+        invader.y += 5; // Move down the hole row of invaders
       }
     }
 
