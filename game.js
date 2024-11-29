@@ -6,6 +6,7 @@ let state = "playGame";
 let startScreen = new StartScreen(0, 0);
 let instructionScreen = new InstructionScreen(0, 0);
 let gameScreen = new GameScreen(0, 0);
+
 export let images;
 
 function preload() {
