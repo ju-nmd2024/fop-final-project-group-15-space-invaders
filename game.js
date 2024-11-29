@@ -9,6 +9,11 @@ let gameScreen = new GameScreen(0, 0);
 
 export let images;
 
+// Window
+window.setup = setup;
+window.draw = draw;
+window.preload = preload;
+
 function preload() {
   images = {
     invader1: loadImage("images/spaceinvader_purplecloud.png"),
@@ -18,13 +23,13 @@ function preload() {
     player: loadImage("images/spaceinvader_player.png"),
   };
 }
-window.preload = preload;
 
 function setup() {
   gameScreen.setup();
   createCanvas(1000, 1000);
 }
-window.setup = setup;
+
+//const player = new Player(500, 900, 50, 50, images.player);
 
 // function startScreen() {
 //   background(0, 140, 0);
@@ -60,6 +65,7 @@ function draw() {
     instructionScreen.draw();
   } else if (state === "playGame") {
     gameScreen.draw();
+    //player.draw();
   }
 }
 
@@ -71,8 +77,6 @@ function draw() {
 //   gameOverScreen();
 // } else if (state === "youWin") {
 //   youWinScreen();
-
-window.draw = draw;
 
 // function mouseClicked() {
 //   if (state === "start") {

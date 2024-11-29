@@ -4,7 +4,7 @@ export default class Invader {
     this.y = y;
     this.width = width;
     this.height = height;
-    this.colour = (255, 255, 255);
+    this.colour = (255, 255, 0);
     this.velocity = 1;
     this.image = image;
   }

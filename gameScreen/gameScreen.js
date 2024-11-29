@@ -2,15 +2,17 @@ import { images } from "../game.js";
 import Invader from "./invader.js";
 import Player from "./player.js";
 
+let player;
+
 export default class GameScreen {
   constructor(x, y) {
     this.x = x;
     this.y = y;
     this.count = 0;
-    this.player = new Player();
+    this.player = new Player(400, 800);
     this.invaders = [];
     this.moveDirection = 1; // 1 for right, -1 for left
-    this.invaderSpeed = 1; // Velocity for invaders
+    this.invaderSpeed = 1; // Speed for invaders
   }
 
   setup() {
@@ -31,7 +33,7 @@ export default class GameScreen {
         new Invader(150 + x * 75, 455, 50, 50, images.invader1)
       );
     }
-    this.player(images.player, 250, 400, 50, 50);
+    player = new Player(450, 900, 50, 50, images.player);
   }
 
   draw() {
@@ -45,52 +47,66 @@ export default class GameScreen {
     // }
 
     this.invaders.forEach((invader) => {
-      invader.draw();
+      invader.draw(); // Drawing the invader
     });
-
     // Begin help from chatGTP
     // Check if an invader has retched the edge
     this.checkInvaderMovement();
+    //Check if an invader has retched the edge
 
     // Update the movement for the hole group
     this.invaders.forEach((invader) => {
       invader.move();
     });
-    // End help from chatGTP
+
+    // Drawing the player
+    player.draw();
+    let edgeReached = this.checkPlayerMovement();
+
+    // Moving the player
+    if (edgeReached === false) {
+      if (keyIsDown(37)) {
+        player.turnLeft();
+      }
+      if (keyIsDown(39)) {
+        player.turnRight();
+      }
+    }
   }
 
   checkInvaderMovement() {
-    let edgeReched = false;
+    let edgeReached = false;
 
-    // Check if an invader has retched the edge
+    // Check if an invader has reached the edge
     for (let invader of this.invaders) {
       if (invader.x < 0 || invader.x > width - 50) {
         // You always count at the left, upper corner.
-        edgeReched = true;
+        edgeReached = true;
         break;
       }
     }
 
-    // If a edge is retched, switch direction for all invaders
-    if (edgeReched) {
+    // If a edge is reached, switch direction for all invaders
+    if (edgeReached) {
       for (let invader of this.invaders) {
         invader.velocity *= -1; // Switch direction
         invader.y += 5; // Move down the hole row of invaders
       }
     }
+    // End help from chatGTP
+  }
 
-    // //taken from ChatGPT
-    // for (let i = 0; i < 5; i++) {
-    //   let invader = new Invader1(150, 150, 150, 150);
-    //   this.invader.push(invader);
-    // }
-    // for (let i = 0; i < this.invaders.legnth; i++) {
-    //   let invader = this.invaders[i];
-    //   invader.draw(this.x + i * 100, this.y);
-    // } //taken from ChatGPT
+  checkPlayerMovement() {
+    // Check if the player has reached the edge and return
+    if (player.x < 0) {
+      player.x = 0;
+      return true;
+    }
+    if (player.x > width - 50) {
+      player.x = width - 50;
+      return true;
+    }
 
-    // for (let i = 0; i < 5; i++) {
-    //   this.invader.draw(this.x + i * 100, this.y);
-    // }
+    return false;
   }
 }
