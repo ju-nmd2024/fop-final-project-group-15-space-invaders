@@ -1,11 +1,13 @@
 import { images } from "../game.js";
 import Invader from "./invader.js";
+import Player from "./player.js";
 
 export default class GameScreen {
   constructor(x, y) {
     this.x = x;
     this.y = y;
     this.count = 0;
+    this.player = new Player();
     this.invaders = [];
     this.moveDirection = 1; // 1 for right, -1 for left
     this.invaderSpeed = 1; // Velocity for invaders
@@ -14,15 +16,22 @@ export default class GameScreen {
   setup() {
     for (let x = 0; x < 8; x++) {
       this.invaders.push(
-        new Invader(150 + x * 75, 150, 50, 50, images.invader1)
+        new Invader(150 + x * 75, 150, 50, 50, images.invader4)
       );
       this.invaders.push(
-        new Invader(150 + x * 75, 225, 50, 50, images.invader2)
+        new Invader(150 + x * 75, 225, 50, 50, images.invader3)
       );
       this.invaders.push(
-        new Invader(150 + x * 75, 300, 50, 50, images.invader3)
+        new Invader(150 + x * 75, 300, 50, 50, images.invader2)
+      );
+      this.invaders.push(
+        new Invader(150 + x * 75, 375, 50, 50, images.invader1)
+      );
+      this.invaders.push(
+        new Invader(150 + x * 75, 455, 50, 50, images.invader1)
       );
     }
+    this.player(images.player, 250, 400, 50, 50);
   }
 
   draw() {

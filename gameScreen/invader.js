@@ -1,5 +1,3 @@
-// import { images } from "../game.js";
-
 export default class Invader {
   constructor(x, y, width, height, image) {
     this.x = x;

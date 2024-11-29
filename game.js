@@ -11,11 +11,11 @@ export let images;
 
 function preload() {
   images = {
-    invader1: loadImage("images/spaceinvader_mushroomalive.png"),
-    invader2: loadImage("images/Space-Invader---Purpule.png"),
-    invader3: loadImage("images/spaceinvader_octopuss.png"),
-    // invader4: loadImage()
-    // invader5: loadImage
+    invader1: loadImage("images/spaceinvader_purplecloud.png"),
+    invader2: loadImage("images/spaceinvader_mushroom.png"),
+    invader3: loadImage("images/spaceinvader_vacuum.png"),
+    invader4: loadImage("images/spaceinvader_octopuss.png"),
+    player: loadImage("images/spaceinvader_player.png"),
   };
 }
 window.preload = preload;
