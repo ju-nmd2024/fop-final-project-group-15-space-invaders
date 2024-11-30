@@ -1,7 +1,10 @@
+// Import
 import { images } from "../game.js";
 import Invader from "./invader.js";
 import Player from "./player.js";
+// import Bullet from "./bullet.js";
 
+// Let
 let player;
 
 export default class GameScreen {
@@ -11,6 +14,7 @@ export default class GameScreen {
     this.count = 0;
     this.player = new Player(400, 800);
     this.invaders = [];
+    this.Bullet = [];
     this.moveDirection = 1; // 1 for right, -1 for left
     this.invaderSpeed = 1; // Speed for invaders
   }
@@ -34,6 +38,12 @@ export default class GameScreen {
       );
     }
     player = new Player(450, 900, 50, 50, images.player);
+
+    // // Add a bullet to the game
+    // addBullet(x, y) {
+    // this.bullets.push(new Bullet(x, y));
+    // }
+
   }
 
   draw() {
@@ -71,8 +81,11 @@ export default class GameScreen {
       if (keyIsDown(39)) {
         player.turnRight();
       }
-    }
   }
+
+  // if (keyIsDown(32)) { // Spacebar
+  //   game.addBullet();
+  // }
 
   checkInvaderMovement() {
     let edgeReached = false;
@@ -108,5 +121,13 @@ export default class GameScreen {
     }
 
     return false;
+  }
+
+  // Collison
+  update() {
+      //  // Remove bullet if it goes off-screen
+      //  if (bullet.isOffScreen()) {
+      //   this.bullets.splice(i, 1);
+      // }
   }
 }

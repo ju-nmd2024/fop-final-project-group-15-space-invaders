@@ -7,8 +7,12 @@ export default class Invader {
     this.colour = (255, 255, 0);
     this.velocity = 1;
     this.image = image;
+    this.alive = true;
   }
-
+  // // Mark the invader as dead
+  // die() {
+  //   this.alive = false;
+  }
   move() {
     this.x = this.x + this.velocity;
   }
