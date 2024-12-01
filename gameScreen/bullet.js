@@ -1,14 +1,16 @@
 export default class Bullet {
-  constructor(x, y, width, height, velocity) {
+  constructor(x, y, width, height, speed) {
     this.x = x;
     this.y = y;
+    // this.position = 0; // Where the bullet currently is
     this.width = 10;
     this.height = 20;
-    this.velocity = velocity;
+    this.speed = this.speed;
+    // this.fire = false;
   }
 
   move() {
-    this.velocity = velocity;
+    this.speed = this.speed;
   }
 
   draw() {
