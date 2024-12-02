@@ -1,3 +1,6 @@
+// Links
+// https://chatgpt.com/
+
 // Import
 import { images } from "../game.js";
 import Invader from "./invader.js";
