@@ -1,12 +1,13 @@
+import { images } from "../game.js";
+
 export default class Player {
-  constructor(x, y, width, height, image) {
+  constructor(x, y, width, height) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
     this.colour = (255, 255, 255);
     this.velocity = 5;
-    this.image = image;
   }
 
   turnLeft() {
@@ -21,7 +22,7 @@ export default class Player {
     push();
     translate(this.x, this.y);
     fill(this.colour);
-    image(this.image, 0, 0, 50, 50);
+    image(images.player, 0, 0, 50, 50);
     pop();
   }
 }

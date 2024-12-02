@@ -2,19 +2,16 @@
 import { images } from "../game.js";
 import Invader from "./invader.js";
 import Player from "./player.js";
-// import Bullet from "./bullet.js";
-
-// Let
-let player;
+import Bullet from "./bullet.js";
 
 export default class GameScreen {
   constructor(x, y) {
     this.x = x;
     this.y = y;
     this.count = 0;
-    this.player = new Player(400, 800);
+    this.player = new Player(450, 900, 50, 50);
     this.invaders = [];
-    this.Bullet = [];
+    this.bullet = [];
     this.moveDirection = 1; // 1 for right, -1 for left
     this.invaderSpeed = 1; // Speed for invaders
   }
@@ -37,24 +34,20 @@ export default class GameScreen {
         new Invader(150 + x * 75, 455, 50, 50, images.invader1)
       );
     }
-    player = new Player(450, 900, 50, 50, images.player);
-
-    // // Add a bullet to the game
-    // addBullet(x, y) {
-    // this.bullets.push(new Bullet(x, y));
-    // }
-
   }
 
   draw() {
     background(0, 0, 0);
+
+    this.bullet.forEach((bullet) => {
+      bullet.draw(); //drawing the bullet
+    });
 
     // SAME AS THE THIS.INVADERS BELOW, which one do we prefere?
     // for (let i = 0; i < this.invaders.length; i++) {
     //   const invader = this.invaders[i];
 
     //   invader.draw();
-    // }
 
     this.invaders.forEach((invader) => {
       invader.draw(); // Drawing the invader
@@ -70,17 +63,23 @@ export default class GameScreen {
     });
 
     // Drawing the player
-    player.draw();
+    this.player.draw();
     let edgeReached = this.checkPlayerMovement();
 
     // Moving the player
     if (edgeReached === false) {
       if (keyIsDown(37)) {
-        player.turnLeft();
+        this.player.turnLeft();
       }
       if (keyIsDown(39)) {
-        player.turnRight();
+        this.player.turnRight();
       }
+    }
+
+    //Moving the bullet
+    if (keyIsDown(32)) {
+      this.bullet.push(new Bullet(this.player.x, this.player.y, 5, 10));
+    }
   }
 
   // if (keyIsDown(32)) { // Spacebar
@@ -111,12 +110,12 @@ export default class GameScreen {
 
   checkPlayerMovement() {
     // Check if the player has reached the edge and return
-    if (player.x < 0) {
-      player.x = 0;
+    if (this.player.x < 0) {
+      this.player.x = 0;
       return true;
     }
-    if (player.x > width - 50) {
-      player.x = width - 50;
+    if (this.player.x > width - 50) {
+      this.player.x = width - 50;
       return true;
     }
 
@@ -125,9 +124,9 @@ export default class GameScreen {
 
   // Collison
   update() {
-      //  // Remove bullet if it goes off-screen
-      //  if (bullet.isOffScreen()) {
-      //   this.bullets.splice(i, 1);
-      // }
+    //  // Remove bullet if it goes off-screen
+    //  if (bullet.isOffScreen()) {
+    //   this.bullets.splice(i, 1);
+    // }
   }
 }
