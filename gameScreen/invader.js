@@ -9,10 +9,6 @@ export default class Invader {
     this.image = image;
     this.alive = true;
   }
-  // // Mark the invader as dead
-  // die() {
-  //   this.alive = false;
-  //}
 
   move() {
     this.x = this.x + this.velocity;

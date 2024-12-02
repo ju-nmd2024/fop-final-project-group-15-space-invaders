@@ -4,7 +4,7 @@ export default class Bullet {
     this.y = y;
     this.width = width;
     this.height = height;
-    this.velocity = 5;
+    this.velocity = 10;
   }
 
   draw() {
@@ -20,20 +20,4 @@ export default class Bullet {
   move() {
     this.y = this.y - this.velocity;
   }
-  //video end help
-
-  // Check if bullet is out ouf the screen
-  // edgeReached(){
-  //   this.y < 0;
-  // }
-
-  //   // Check for collision with an invader
-  //   hits(invader) {
-  //     return (
-  //       this.x < invader.x + invader.width &&
-  //       this.x + this.width > invader.x &&
-  //       this.y < invader.y + invader.height &&
-  //       this.y + this.height > invader.y
-  //     );
-  //   }
 }

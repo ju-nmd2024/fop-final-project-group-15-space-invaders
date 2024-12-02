@@ -11,7 +11,7 @@ export default class GameScreen {
     this.count = 0;
     this.player = new Player(450, 900, 50, 50);
     this.invaders = [];
-    this.bullet = [];
+    this.bullets = [];
     this.moveDirection = 1; // 1 for right, -1 for left
     this.invaderSpeed = 1; // Speed for invaders
   }
@@ -39,27 +39,35 @@ export default class GameScreen {
   draw() {
     background(0, 0, 0);
 
-    this.bullet.forEach((bullet) => {
+    //Drawing the bullet
+    this.checkCollision();
+
+    this.bullets.forEach((bullet) => {
       bullet.draw(); //drawing the bullet
     });
 
-    // SAME AS THE THIS.INVADERS BELOW, which one do we prefere?
-    // for (let i = 0; i < this.invaders.length; i++) {
-    //   const invader = this.invaders[i];
+    //Start help Erik
+    //Moving the bullet
+    if (keyIsDown(32) && this.bullets.length === 0) {
+      //if key is down shoot, and if a bullet is already flying, you can't shoot another bullet
+      this.bullets.push(new Bullet(this.player.x, this.player.y, 5, 10));
+    }
 
-    //   invader.draw();
+    this.ofScreen();
+    //End help erik
 
+    //Drawing the invader
     this.invaders.forEach((invader) => {
-      invader.draw(); // Drawing the invader
+      invader.draw();
     });
-    // Begin help from chatGTP
-    // Check if an invader has retched the edge
-    this.checkInvaderMovement();
-    //Check if an invader has retched the edge
 
-    // Update the movement for the hole group
+    //Moving invaders
+    // Begin help from chatGTP - all code not copied but used as guide/starting point/explanaiton
+    //some parts are copied, bur variables have been changed - ask on lab
+    this.checkInvaderMovement(); // Check if an invader has retched the edge
+
     this.invaders.forEach((invader) => {
-      invader.move();
+      invader.move(); // Update the movement for the hole group
     });
 
     // Drawing the player
@@ -75,16 +83,7 @@ export default class GameScreen {
         this.player.turnRight();
       }
     }
-
-    //Moving the bullet
-    if (keyIsDown(32)) {
-      this.bullet.push(new Bullet(this.player.x, this.player.y, 5, 10));
-    }
-  }
-
-  // if (keyIsDown(32)) { // Spacebar
-  //   game.addBullet();
-  // }
+  } // draw ends
 
   checkInvaderMovement() {
     let edgeReached = false;
@@ -99,13 +98,13 @@ export default class GameScreen {
     }
 
     // If a edge is reached, switch direction for all invaders
+
     if (edgeReached) {
       for (let invader of this.invaders) {
         invader.velocity *= -1; // Switch direction
         invader.y += 5; // Move down the hole row of invaders
       }
     }
-    // End help from chatGTP
   }
 
   checkPlayerMovement() {
@@ -120,13 +119,40 @@ export default class GameScreen {
     }
 
     return false;
-  }
+  } // End help from chatGTP
 
-  // Collison
-  update() {
-    //  // Remove bullet if it goes off-screen
-    //  if (bullet.isOffScreen()) {
-    //   this.bullets.splice(i, 1);
-    // }
+  //start help Erik Second Year NMD Student
+  //for loops index formula taken from stack overflow
+  checkCollision() {
+    for (let [index, bullet] of this.bullets.entries()) {
+      for (let [indexInvader, invader] of this.invaders.entries()) {
+        if (
+          bullet.x > invader.x &&
+          bullet.x < invader.x + invader.width &&
+          bullet.y > invader.y &&
+          bullet.y < invader.y + invader.height
+        ) {
+          this.bullets.splice(index, 1);
+          console.log(this.bullets);
+          this.invaders.splice(indexInvader, 1);
+          break;
+        }
+      }
+    }
+  } //end help erik Second Year NMD student
+
+  ofScreen() {
+    //check if bullet goes of screen top edge or out of bounde
+    //Start help chat gpt
+    for (let [index, bullet] of this.bullets.entries()) {
+      if (
+        bullet.x < 0 ||
+        bullet.x > width ||
+        bullet.y < 0 ||
+        bullet.y > height
+      ) {
+        this.bullets.splice(index, 1); // remove bullet from screen
+      }
+    } //end help ChatGpt
   }
 }
