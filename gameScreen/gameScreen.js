@@ -51,10 +51,9 @@ export default class GameScreen {
     if (keyIsDown(32) && this.bullets.length === 0) {
       //if key is down shoot, and if a bullet is already flying, you can't shoot another bullet
       this.bullets.push(new Bullet(this.player.x, this.player.y, 5, 10));
-    }
+    } //end help erik
 
     this.ofScreen();
-    //End help erik
 
     //Drawing the invader
     this.invaders.forEach((invader) => {
@@ -142,7 +141,7 @@ export default class GameScreen {
   } //end help erik Second Year NMD student
 
   ofScreen() {
-    //check if bullet goes of screen top edge or out of bounde
+    //check if bullet goes of screen top edge or out of bounds
     //Start help chat gpt
     for (let [index, bullet] of this.bullets.entries()) {
       if (
