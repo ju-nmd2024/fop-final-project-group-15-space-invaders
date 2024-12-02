@@ -1,5 +1,5 @@
 // Links
-// https://chatgpt.com/
+//
 
 // Import
 import { images } from "../game.js";
@@ -53,10 +53,15 @@ export default class GameScreen {
     //Moving the bullet
     if (keyIsDown(32) && this.bullets.length === 0) {
       //if key is down shoot, and if a bullet is already flying, you can't shoot another bullet
-      this.bullets.push(new Bullet(this.player.x, this.player.y, 5, 10));
-    } //end help erik
+      this.bullets.push(new Bullet(this.player.x, this.player.y, 5, 10, 10));
+    } //end help Erik
 
     this.ofScreen();
+
+    // Math random, bullets shooting from the invaders
+    if (Math.random() * 100 > 99) {
+      this.invaderShoot();
+    }
 
     //Drawing the invader
     this.invaders.forEach((invader) => {
@@ -155,6 +160,39 @@ export default class GameScreen {
       ) {
         this.bullets.splice(index, 1); // remove bullet from screen
       }
-    } //end help ChatGpt
+    }
   }
+
+  invaderShoot() {
+    // Invader shooting at player at random
+    let sortedInvaders = [];
+
+    // First, sort the invaders based on their x position
+    this.invaders.forEach((invader) => {
+      let foundList = sortedInvaders.find((list) => invader.x === list[0].x);
+
+      if (foundList) {
+        foundList.push(invader); // If the list for this x exists, add to it
+      } else {
+        sortedInvaders.push([invader]); // If not, create a new list for this x
+      }
+    });
+
+    sortedInvaders.forEach((list) => {
+      list.sort((a, b) => b.y - a.y); // Sort invaders within each group by y value in descending order
+    });
+
+    let chosenInvader =
+      sortedInvaders[Math.floor(Math.random() * sortedInvaders.length)][0];
+
+    this.bullets.push(
+      new Bullet(
+        chosenInvader.x + chosenInvader.width / 2,
+        chosenInvader.y + chosenInvader.height,
+        5,
+        10,
+        -10
+      )
+    );
+  } //end help ChatGpt
 }

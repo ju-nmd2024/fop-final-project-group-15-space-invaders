@@ -4,7 +4,7 @@ export default class Bullet {
     this.y = y;
     this.width = width;
     this.height = height;
-    this.velocity = 10;
+    this.velocity = speed;
   }
 
   draw() {
