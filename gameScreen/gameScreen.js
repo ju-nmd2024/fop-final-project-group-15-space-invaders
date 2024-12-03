@@ -6,12 +6,15 @@ import { images } from "../game.js";
 import Invader from "./invader.js";
 import Player from "./player.js";
 import Bullet from "./bullet.js";
+import Protection from "./protection.js";
 
 export default class GameScreen {
   constructor(x, y) {
     this.x = x;
     this.y = y;
     this.count = 0;
+    this.protection = new Protection(600, 800, 150, 50);
+    this.protection2 = new Protection(200, 800, 150, 50);
     this.player = new Player(450, 900, 50, 50);
     this.invaders = [];
     this.bullets = [];
@@ -49,10 +52,8 @@ export default class GameScreen {
       bullet.draw(); //drawing the bullet
     });
 
-    //Start help Erik
-    //Moving the bullet
+    //Start help Erik, Moving the bullet
     if (keyIsDown(32) && this.bullets.length === 0) {
-      //if key is down shoot, and if a bullet is already flying, you can't shoot another bullet
       this.bullets.push(new Bullet(this.player.x, this.player.y, 5, 10, 10));
     }
 
@@ -69,11 +70,16 @@ export default class GameScreen {
     });
 
     //Moving invaders
-    this.checkInvaderMovement(); // Check if an invader has retched the edge
+    this.checkInvaderMovement(); // Check if an invader has reached the edge
 
     this.invaders.forEach((invader) => {
       invader.move(); // Update the movement for the hole group
     });
+
+    //Drawing protection
+    this.protection.draw();
+    this.protection2.draw();
+    this.checkProtectionColission();
 
     // Drawing the player
     this.player.draw();
@@ -88,7 +94,14 @@ export default class GameScreen {
         this.player.turnRight();
       }
     }
-  } // draw ends
+
+    //Decreasing Lives
+    this.checkPlayerCollision();
+
+    // if (this.playerLives === 0) {
+    //   console.log(gameOver);
+    // }
+  } //draw ends
 
   checkInvaderMovement() {
     let edgeReached = false;
@@ -100,6 +113,9 @@ export default class GameScreen {
         edgeReached = true;
         break;
       }
+      // } if (invader.y < 0 || invader.y > height - 880){
+      //   let state = "youLoose";
+      // }
     }
 
     // Begin help from chatGTP - all code not copied but used as guide/starting point/explanaiton
@@ -122,9 +138,9 @@ export default class GameScreen {
       this.player.x = width - 50;
       return true;
     }
-
     return false;
-  } // End help from chatGTP
+  }
+  // End help from chatGTP
 
   //start help Erik Second Year NMD Student
   //for loops index formula taken from stack overflow
@@ -144,7 +160,7 @@ export default class GameScreen {
           //end taken directly from ChatGPT
           // Help with index from secondyear nmd, student
           this.bullets.splice(index, 1);
-          console.log(this.bullets);
+          // console.log(this.bullets);
           this.invaders.splice(indexInvader, 1);
           break;
         }
@@ -152,9 +168,50 @@ export default class GameScreen {
     }
   }
 
-  // Begin help from second year nmd student
+  checkPlayerCollision() {
+    for (let [index, bullet] of this.bullets.entries()) {
+      if (
+        bullet.x > this.player.x &&
+        bullet.x < this.player.x + this.player.width &&
+        bullet.y > this.player.y &&
+        bullet.y < this.player.y + this.player.height
+      ) {
+        this.player.lives = this.player.lives - 1;
+        this.bullets.splice(index, 1);
+        break;
+      }
+    }
+  }
+
+  checkProtectionColission() {
+    for (let [index, bullet] of this.bullets.entries()) {
+      if (
+        bullet.x > this.protection.x &&
+        bullet.x < this.protection.x + this.protection.width &&
+        bullet.y > this.protection.y &&
+        bullet.y < this.protection.y + this.protection.height
+      ) {
+        this.bullets.splice(index, 1);
+        break;
+      }
+      if (
+        bullet.x > this.protection2.x &&
+        bullet.x < this.protection2.x + this.protection2.width &&
+        bullet.y > this.protection2.y &&
+        bullet.y < this.protection2.y + this.protection2.height
+      ) {
+        this.bullets.splice(index, 1);
+        break;
+      }
+    }
+  }
+
+  // //end help erik
+
+  // // Begin help from second year nmd student
+
   ofScreen() {
-    //check if bullet goes of screen top edge or out of bounds
+    //check if bullet goes of screen top edge or out of bounds and abilty to shoot new bullet
     for (let [index, bullet] of this.bullets.entries()) {
       if (
         bullet.x < 0 ||
@@ -198,15 +255,5 @@ export default class GameScreen {
         -10
       )
     );
-  } //end help from  second year,nmd student
-
-  playerHit() {
-    if (
-      bullet.x > player.x &&
-      bullet.x < player.x + player.width &&
-      bullet.y > player.y &&
-      bullet.y < player.y + player.height
-    ) {
-    }
-  }
+  } //end help from second year,nmd student
 }

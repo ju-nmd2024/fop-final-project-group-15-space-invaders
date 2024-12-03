@@ -1,24 +1,18 @@
-export default class Bullet {
+export default class Protection {
   constructor(x, y, width, height, speed) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
-    this.velocity = speed;
-    this.player = false;
   }
 
   draw() {
     push();
     translate(this.x, this.y);
-    fill(255);
+    fill(144, 144, 144);
     rect(0, 0, this.width, this.height);
+    // rect(0, 0 + 70, this.width, this.height);
+    // rect(0, 0 + 140, this.width, this.height);
     pop();
-
-    this.move();
-  }
-
-  move() {
-    this.y = this.y - this.velocity;
   }
 }
