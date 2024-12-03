@@ -54,14 +54,14 @@ export default class GameScreen {
     if (keyIsDown(32) && this.bullets.length === 0) {
       //if key is down shoot, and if a bullet is already flying, you can't shoot another bullet
       this.bullets.push(new Bullet(this.player.x, this.player.y, 5, 10, 10));
-    } //end help Erik
+    }
 
     this.ofScreen();
 
     // Math random, bullets shooting from the invaders
     if (Math.random() * 100 > 99) {
       this.invaderShoot();
-    }
+    } //end help Erik
 
     //Drawing the invader
     this.invaders.forEach((invader) => {
@@ -69,8 +69,6 @@ export default class GameScreen {
     });
 
     //Moving invaders
-    // Begin help from chatGTP - all code not copied but used as guide/starting point/explanaiton
-    //some parts are copied, bur variables have been changed - ask on lab
     this.checkInvaderMovement(); // Check if an invader has retched the edge
 
     this.invaders.forEach((invader) => {
@@ -104,8 +102,8 @@ export default class GameScreen {
       }
     }
 
+    // Begin help from chatGTP - all code not copied but used as guide/starting point/explanaiton
     // If a edge is reached, switch direction for all invaders
-
     if (edgeReached) {
       for (let invader of this.invaders) {
         invader.velocity *= -1; // Switch direction
@@ -133,6 +131,7 @@ export default class GameScreen {
 
   checkInvaderCollision() {
     for (let [index, bullet] of this.bullets.entries()) {
+      //end help erik Second Year NMD student
       //Defines
       for (let [indexInvader, invader] of this.invaders.entries()) {
         if (
@@ -142,7 +141,8 @@ export default class GameScreen {
           bullet.y > invader.y &&
           bullet.y < invader.y + invader.height
         ) {
-          ////end taken directly from ChatGPT
+          //end taken directly from ChatGPT
+          // Help with index from secondyear nmd, student
           this.bullets.splice(index, 1);
           console.log(this.bullets);
           this.invaders.splice(indexInvader, 1);
@@ -150,11 +150,11 @@ export default class GameScreen {
         }
       }
     }
-  } //end help erik Second Year NMD student
+  }
 
+  // Begin help from second year nmd student
   ofScreen() {
     //check if bullet goes of screen top edge or out of bounds
-    //Start help chat gpt
     for (let [index, bullet] of this.bullets.entries()) {
       if (
         bullet.x < 0 ||
@@ -198,7 +198,7 @@ export default class GameScreen {
         -10
       )
     );
-  } //end help ChatGpt
+  } //end help from  second year,nmd student
 
   playerHit() {
     if (
