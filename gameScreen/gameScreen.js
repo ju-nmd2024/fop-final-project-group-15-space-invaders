@@ -43,7 +43,7 @@ export default class GameScreen {
     background(0, 0, 0);
 
     //Drawing the bullet
-    this.checkCollision();
+    this.checkInvaderCollision();
 
     this.bullets.forEach((bullet) => {
       bullet.draw(); //drawing the bullet
@@ -130,15 +130,19 @@ export default class GameScreen {
 
   //start help Erik Second Year NMD Student
   //for loops index formula taken from stack overflow
-  checkCollision() {
+
+  checkInvaderCollision() {
     for (let [index, bullet] of this.bullets.entries()) {
+      //Defines
       for (let [indexInvader, invader] of this.invaders.entries()) {
         if (
+          //start taken directly from chatGPT
           bullet.x > invader.x &&
           bullet.x < invader.x + invader.width &&
           bullet.y > invader.y &&
           bullet.y < invader.y + invader.height
         ) {
+          ////end taken directly from ChatGPT
           this.bullets.splice(index, 1);
           console.log(this.bullets);
           this.invaders.splice(indexInvader, 1);
@@ -195,4 +199,14 @@ export default class GameScreen {
       )
     );
   } //end help ChatGpt
+
+  playerHit() {
+    if (
+      bullet.x > player.x &&
+      bullet.x < player.x + player.width &&
+      bullet.y > player.y &&
+      bullet.y < player.y + player.height
+    ) {
+    }
+  }
 }

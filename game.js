@@ -16,11 +16,11 @@ window.preload = preload;
 
 function preload() {
   images = {
-    invader1: loadImage("images/spaceinvader_purplecloud.png"),
-    invader2: loadImage("images/spaceinvader_mushroom.png"),
-    invader3: loadImage("images/spaceinvader_vacuum.png"),
-    invader4: loadImage("images/spaceinvader_octopuss.png"),
-    player: loadImage("images/spaceinvader_player.png"),
+    invader1: loadImage("images/spaceinvader_1.png"),
+    invader2: loadImage("images/spaceinvader_2.png"),
+    invader3: loadImage("images/spaceinvader_3.png"),
+    invader4: loadImage("images/spaceinvader_4.png"),
+    player: loadImage("images/spaceinvaders_player.png"),
   };
 }
 
