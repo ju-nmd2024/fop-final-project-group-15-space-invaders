@@ -5,7 +5,6 @@ export default class Bullet {
     this.width = width;
     this.height = height;
     this.velocity = speed;
-    this.player = false;
   }
 
   draw() {

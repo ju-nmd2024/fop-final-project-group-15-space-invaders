@@ -18,6 +18,7 @@ export default class GameScreen {
     this.player = new Player(450, 900, 50, 50);
     this.invaders = [];
     this.bullets = [];
+    this.enemyBullets = [];
     this.moveDirection = 1; // 1 for right, -1 for left
     this.invaderSpeed = 1; // Speed for invaders
   }
@@ -58,6 +59,10 @@ export default class GameScreen {
     }
 
     this.ofScreen();
+
+    this.enemyBullets.forEach((enemyBullet) => {
+      enemyBullet.draw();
+    });
 
     // Math random, bullets shooting from the invaders
     if (Math.random() * 100 > 99) {
@@ -169,38 +174,38 @@ export default class GameScreen {
   }
 
   checkPlayerCollision() {
-    for (let [index, bullet] of this.bullets.entries()) {
+    for (let [indexEnemyBullet, enemyBullet] of this.enemyBullets.entries()) {
       if (
-        bullet.x > this.player.x &&
-        bullet.x < this.player.x + this.player.width &&
-        bullet.y > this.player.y &&
-        bullet.y < this.player.y + this.player.height
+        enemyBullet.x > this.player.x &&
+        enemyBullet.x < this.player.x + this.player.width &&
+        enemyBullet.y > this.player.y &&
+        enemyBullet.y < this.player.y + this.player.height
       ) {
         this.player.lives = this.player.lives - 1;
-        this.bullets.splice(index, 1);
+        this.enemyBullets.splice(indexEnemyBullet, 1);
         break;
       }
     }
   }
 
   checkProtectionColission() {
-    for (let [index, bullet] of this.bullets.entries()) {
+    for (let [indexEnemyBullet, enemyBullet] of this.enemyBullets.entries()) {
       if (
-        bullet.x > this.protection.x &&
-        bullet.x < this.protection.x + this.protection.width &&
-        bullet.y > this.protection.y &&
-        bullet.y < this.protection.y + this.protection.height
+        enemyBullet.x > this.protection.x &&
+        enemyBullet.x < this.protection.x + this.protection.width &&
+        enemyBullet.y > this.protection.y &&
+        enemyBullet.y < this.protection.y + this.protection.height
       ) {
-        this.bullets.splice(index, 1);
+        this.enemyBullets.splice(indexEnemyBullet, 1);
         break;
       }
       if (
-        bullet.x > this.protection2.x &&
-        bullet.x < this.protection2.x + this.protection2.width &&
-        bullet.y > this.protection2.y &&
-        bullet.y < this.protection2.y + this.protection2.height
+        enemyBullet.x > this.protection2.x &&
+        enemyBullet.x < this.protection2.x + this.protection2.width &&
+        enemyBullet.y > this.protection2.y &&
+        enemyBullet.y < this.protection2.y + this.protection2.height
       ) {
-        this.bullets.splice(index, 1);
+        this.enemyBullets.splice(indexEnemyBullet, 1);
         break;
       }
     }
@@ -246,7 +251,7 @@ export default class GameScreen {
     let chosenInvader =
       sortedInvaders[Math.floor(Math.random() * sortedInvaders.length)][0];
 
-    this.bullets.push(
+    this.enemyBullets.push(
       new Bullet(
         chosenInvader.x + chosenInvader.width / 2,
         chosenInvader.y + chosenInvader.height,
