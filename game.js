@@ -2,7 +2,7 @@ import StartScreen from "./startScreen/startScreen.js";
 import InstructionScreen from "./instructionsScreen/instructionScreen.js";
 import GameScreen from "./gameScreen/gameScreen.js";
 
-let state = "instructions";
+let state = "start";
 let startScreen = new StartScreen(0, 0);
 let instructionScreen = new InstructionScreen(0, 0);
 let gameScreen = new GameScreen(0, 0);
