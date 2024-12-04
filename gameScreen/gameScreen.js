@@ -7,6 +7,8 @@ import Invader from "./invader.js";
 import Player from "./player.js";
 import Bullet from "./bullet.js";
 import Protection from "./protection.js";
+import Life from "./lives.js";
+import Score from "./score.js";
 
 export default class GameScreen {
   constructor(x, y) {
@@ -19,8 +21,10 @@ export default class GameScreen {
     this.invaders = [];
     this.bullets = [];
     this.enemyBullets = [];
+    this.lives = [];
     this.moveDirection = 1; // 1 for right, -1 for left
     this.invaderSpeed = 1; // Speed for invaders
+    this.score = new Score(30 + x * 50, 90, 40, 40);
   }
 
   setup() {
@@ -40,6 +44,10 @@ export default class GameScreen {
       this.invaders.push(
         new Invader(150 + x * 75, 455, 50, 50, images.invader1)
       );
+    }
+
+    for (let x = 0; x < 3; x++) {
+      this.lives.push(new Life(830 + x * 50, 50, 40, 40, images.lives));
     }
   }
 
@@ -64,6 +72,12 @@ export default class GameScreen {
       enemyBullet.draw();
     });
 
+    this.score.draw();
+
+    // if (this.checkInvaderCollision) {
+    //   this.score = this.score + 20;
+    // }
+
     // Math random, bullets shooting from the invaders
     if (Math.random() * 100 > 99) {
       this.invaderShoot();
@@ -85,6 +99,7 @@ export default class GameScreen {
     this.protection.draw();
     this.protection2.draw();
     this.checkProtectionColission();
+    this.checkProtectionColissionPlayer();
 
     // Drawing the player
     this.player.draw();
@@ -102,6 +117,13 @@ export default class GameScreen {
 
     //Decreasing Lives
     this.checkPlayerCollision();
+    // this.increasingScore();
+
+    //Drawing the lives
+    this.lives.forEach((lives) => {
+      lives.draw();
+    });
+    // this.decreasingLives();
 
     // if (this.playerLives === 0) {
     //   console.log(gameOver);
@@ -150,7 +172,9 @@ export default class GameScreen {
   //start help Erik Second Year NMD Student
   //for loops index formula taken from stack overflow
 
+  //If invader is shot function
   checkInvaderCollision() {
+    let invaderScore = 0;
     for (let [index, bullet] of this.bullets.entries()) {
       //end help erik Second Year NMD student
       //Defines
@@ -173,21 +197,51 @@ export default class GameScreen {
     }
   }
 
+  //Checking if player is shot
   checkPlayerCollision() {
     for (let [indexEnemyBullet, enemyBullet] of this.enemyBullets.entries()) {
+      for (let [indexLives, life] of this.lives.entries()) {
+        if (
+          enemyBullet.x > this.player.x &&
+          enemyBullet.x < this.player.x + this.player.width &&
+          enemyBullet.y > this.player.y &&
+          enemyBullet.y < this.player.y + this.player.height
+        ) {
+          this.player.chance = this.player.chance - 1;
+          console.log(this.player.chance);
+          this.enemyBullets.splice(indexEnemyBullet, 1);
+          this.lives.splice(indexLives, 1);
+          break;
+        }
+      }
+    }
+  }
+
+  //Plaver can't shoot throught the protections
+  checkProtectionColissionPlayer() {
+    for (let [index, bullet] of this.bullets.entries()) {
       if (
-        enemyBullet.x > this.player.x &&
-        enemyBullet.x < this.player.x + this.player.width &&
-        enemyBullet.y > this.player.y &&
-        enemyBullet.y < this.player.y + this.player.height
+        bullet.x > this.protection.x &&
+        bullet.x < this.protection.x + this.protection.width &&
+        bullet.y > this.protection.y &&
+        bullet.y < this.protection.y + this.protection.height
       ) {
-        this.player.lives = this.player.lives - 1;
-        this.enemyBullets.splice(indexEnemyBullet, 1);
+        this.bullets.splice(index, 1);
+        break;
+      }
+      if (
+        bullet.x > this.protection2.x &&
+        bullet.x < this.protection2.x + this.protection2.width &&
+        bullet.y > this.protection2.y &&
+        bullet.y < this.protection2.y + this.protection2.height
+      ) {
+        this.bullets.splice(index, 1);
         break;
       }
     }
   }
 
+  //invaders can't shoot throught the protections
   checkProtectionColission() {
     for (let [indexEnemyBullet, enemyBullet] of this.enemyBullets.entries()) {
       if (
@@ -210,6 +264,13 @@ export default class GameScreen {
       }
     }
   }
+
+  // increasingScore() {
+  //   let invaderScore = 0;
+  //   if (this.invaders.splice(indexInvader, 1)) {
+  //     invaderScore = invaderScore + 20;
+  //   }
+  // }
 
   // //end help erik
 

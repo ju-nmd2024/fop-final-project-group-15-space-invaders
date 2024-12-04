@@ -9,7 +9,7 @@ export default class Player {
     this.height = height;
     this.colour = (255, 255, 255);
     this.velocity = 5;
-    this.lives = 3;
+    this.chance = 3;
   }
 
   turnLeft() {

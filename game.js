@@ -2,7 +2,7 @@ import StartScreen from "./startScreen/startScreen.js";
 import InstructionScreen from "./instructionsScreen/instructionScreen.js";
 import GameScreen from "./gameScreen/gameScreen.js";
 
-let state = "start";
+let state = "playGame";
 let startScreen = new StartScreen(0, 0);
 let instructionScreen = new InstructionScreen(0, 0);
 let gameScreen = new GameScreen(0, 0);
@@ -23,6 +23,7 @@ function preload() {
     player: loadImage("images/spaceinvaders_player.png"),
     startBackground: loadImage("images/spaceinvaders_background.png"),
     instructionsBackground: loadImage("images/spaceinvaders_instructions.png"),
+    lives: loadImage("images/spaceinvaders_lives.png"),
   };
 }
 
