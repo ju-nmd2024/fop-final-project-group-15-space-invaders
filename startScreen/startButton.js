@@ -1,4 +1,4 @@
-export default class StartButton {
+export default class Button {
   constructor(x, y, width, height, text, callback) {
     this.x = x;
     this.y = y;

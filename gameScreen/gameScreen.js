@@ -1,5 +1,5 @@
 // Links
-// Taken from video  - space invaders in p5.js part 5 - creating a scoreboard https://www.youtube.com/watch?v=W_CmwdgBpG0
+//
 
 // Import
 import { images } from "../game.js";
@@ -8,10 +8,10 @@ import Player from "./player.js";
 import Bullet from "./bullet.js";
 import Protection from "./protection.js";
 import Life from "./lives.js";
-// import Score from "./score.js";
+import Score from "./score.js";
 
 export default class GameScreen {
-  constructor(x, y, score) {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
     this.count = 0;
@@ -24,8 +24,8 @@ export default class GameScreen {
     this.lives = [];
     this.moveDirection = 1; // 1 for right, -1 for left
     this.invaderSpeed = 1; // Speed for invaders
+    this.scoreText = new Score(50, 90, 40, 40);
     this.score = 0;
-    // new Score(30 + x * 50, 90, 40, 40);
   }
 
   setup() {
@@ -73,19 +73,10 @@ export default class GameScreen {
       enemyBullet.draw();
     });
 
-    // Score
-    push();
-    translate(this.x, this.y);
-    fill(255);
-    textSize(25);
-    text("Score:", 50, 50, 50, 50);
-    // text(score, this.x + 40, this.y);
-    pop();
+    this.scoreText.draw();
 
     // if (this.checkInvaderCollision) {
-    //   this.score.forEach((score) => {
-    //     score.draw();
-    //   });
+    //   this.score = this.score + 20;
     // }
 
     // Math random, bullets shooting from the invaders
@@ -125,14 +116,15 @@ export default class GameScreen {
       }
     }
 
-    //Score if invader is shot
+    //Score if invader is Shot
     let updateScore = this.score;
     fill(255);
     textSize(25);
-    text(updateScore, 130, 50, 50, 50);
+    text(updateScore, 130, 67, 40, 40);
 
     //Decreasing Lives
     this.checkPlayerCollision();
+    // this.increasingScore();
 
     //Drawing the lives
     this.lives.forEach((lives) => {
@@ -190,27 +182,23 @@ export default class GameScreen {
   //If invader is shot function
   checkInvaderCollision() {
     for (let [index, bullet] of this.bullets.entries()) {
+      //end help erik Second Year NMD student
+      //Defines
       for (let [indexInvader, invader] of this.invaders.entries()) {
-        //end help erik Second Year NMD student
-        //Defines
-        for (let [indexInvader, invader] of this.invaders.entries()) {
-          if (
-            //start taken directly from chatGPT
-            bullet.x > invader.x &&
-            bullet.x < invader.x + invader.width &&
-            bullet.y > invader.y &&
-            bullet.y < invader.y + invader.height
-          ) {
-            //end taken directly from ChatGPT
-            // Help with index from secondyear nmd, student
-            this.bullets.splice(index, 1);
-            // console.log(this.bullets);
-            this.invaders.splice(indexInvader, 1);
-            //help erik
-            this.updateScore();
-            //help erik
-            break;
-          }
+        if (
+          //start taken directly from chatGPT
+          bullet.x > invader.x &&
+          bullet.x < invader.x + invader.width &&
+          bullet.y > invader.y &&
+          bullet.y < invader.y + invader.height
+        ) {
+          //end taken directly from ChatGPT
+          // Help with index from secondyear nmd, student
+          this.bullets.splice(index, 1);
+          // console.log(this.bullets);
+          this.invaders.splice(indexInvader, 1);
+          this.updateScore(); //erik
+          break;
         }
       }
     }
@@ -282,12 +270,13 @@ export default class GameScreen {
         break;
       }
     }
-  } //end help erik
+  }
 
-  //start Erik
+  //start help erik
   updateScore() {
     this.score = this.score + 20;
-  } //end erik
+  }
+  //end help erik??
 
   // // Begin help from second year nmd student
 
@@ -335,6 +324,6 @@ export default class GameScreen {
         10,
         -10
       )
-    ); //end help from second year,nmd student
-  }
+    );
+  } //end help from second year,nmd student
 }

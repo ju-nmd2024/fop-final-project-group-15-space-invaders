@@ -1,21 +1,15 @@
 //Inspired by Alva Norberg, first year NMD student
 import { images } from "../game.js";
-import StartButton from "./startButton.js";
-import InstructionsButton from "./instructionsButton.js";
+import Button from "./startButton.js";
+// import InstructionsButton from "./instructionsButton.js";
 
 export default class StartScreen {
   constructor(x, y) {
     this.x = x;
     this.y = y;
 
-    this.startButton = new StartButton(
-      1000 / 2,
-      1000 / 2.2,
-      250,
-      60,
-      "Start Game"
-    );
-    this.instructionsButton = new InstructionsButton(
+    this.startButton = new Button(1000 / 2, 1000 / 2.2, 250, 60, "Start Game");
+    this.instructionsButton = new Button(
       1000 / 2,
       1000 / 1.65,
       250,
@@ -34,9 +28,9 @@ export default class StartScreen {
     this.instructionsButton.draw();
   }
 
-  mouseClicked() {
-    this.instructionsButton.mouseClicked;
-  }
+  // mouseClicked() {
+  //   this.instructionsButton.mouseClicked;
+  // }
 }
 
 // const startScreen = new StartScreen(0, 0);

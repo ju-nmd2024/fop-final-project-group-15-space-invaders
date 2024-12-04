@@ -1,11 +1,13 @@
 import StartScreen from "./startScreen/startScreen.js";
 import InstructionScreen from "./instructionsScreen/instructionScreen.js";
 import GameScreen from "./gameScreen/gameScreen.js";
+import GameOverScreen from "./gameOverScreen/gameOverScreen.js";
 
 let state = "playGame";
 let startScreen = new StartScreen(0, 0);
 let instructionScreen = new InstructionScreen(0, 0);
 let gameScreen = new GameScreen(0, 0);
+let gameOverScreen = new GameOverScreen(0, 0);
 
 export let images;
 
@@ -21,9 +23,10 @@ function preload() {
     invader3: loadImage("images/spaceinvader_3.png"),
     invader4: loadImage("images/spaceinvader_4.png"),
     player: loadImage("images/spaceinvaders_player.png"),
+    lives: loadImage("images/spaceinvaders_lives.png"),
     startBackground: loadImage("images/spaceinvaders_background.png"),
     instructionsBackground: loadImage("images/spaceinvaders_instructions.png"),
-    lives: loadImage("images/spaceinvaders_lives.png"),
+    gameOverBackground: loadImage("images/spaceinvaders_gameOver.png"),
   };
 }
 
@@ -33,25 +36,6 @@ function setup() {
 }
 
 //const player = new Player(500, 900, 50, 50, images.player);
-
-// function startScreen() {
-//   background(0, 140, 0);
-// }
-
-// function rulesScreen() {
-//   background(0, 0, 0);
-// }
-
-// function gameScreen() {
-//   background(0, 140, 255);
-// }
-
-// function youWinScreen() {
-//   background(255, 0, 0);
-// }
-// function gameOverScreen() {
-//   background(255, 0, 140);
-// }
 
 //   if (mouseIsPressed) {
 //     if (myButton.hitTest(mouseX, mouseY)) {
@@ -68,7 +52,8 @@ function draw() {
     instructionScreen.draw();
   } else if (state === "playGame") {
     gameScreen.draw();
-    //player.draw();
+  } else if (state === "gameOver") {
+    gameOverScreen.draw();
   }
 }
 
@@ -89,20 +74,4 @@ function draw() {
 //   } else if (state === "gameOver") {
 //     state = "start";
 //   }
-// }
-
-// function keyPressed() {
-//   if (keyCode === LEFT_ARROW) {
-//     snake.direction.turnLeft();
-//   }
-//   if (keyCode === RIGHT_ARROW) {
-//     snake.direction.turnRight();
-//   }
-//   if (keyCode === UP_ARROW) {
-//     snake.direction.turnUp();
-//   }
-//   if (keyCode === DOWN_ARROW) {
-//     snake.direction.turnDown();
-//   }
-//   return false;
 // }
