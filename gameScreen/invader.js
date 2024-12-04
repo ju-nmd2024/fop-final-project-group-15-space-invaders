@@ -8,6 +8,7 @@ export default class Invader {
     this.velocity = 1;
     this.image = image;
     this.alive = true;
+    this.score = this.score;
   }
 
   move() {
