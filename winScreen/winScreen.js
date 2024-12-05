@@ -1,6 +1,4 @@
 // import { images } from "../game.js";
-// import Button from "../"
+// import Button from "../";
 
-// export default class winScreen {
-
-// }
+// export default class winScreen {}

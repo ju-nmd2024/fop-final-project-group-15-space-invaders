@@ -1,5 +1,7 @@
 import { images } from "../game.js";
 import Button from "../startScreen/button.js";
+import globals from "../globals.js";
+import GameScreen from "../gameScreen/gameScreen.js";
 
 export default class GameOverScreen {
   constructor(x, y) {
@@ -16,5 +18,15 @@ export default class GameOverScreen {
     // image(images.winScreen, 0, 0, 1000, 1000);
     this.playAgainButton.draw();
     this.homeButton.draw();
+    this.mouseClicked();
+  }
+
+  mouseClicked() {
+    if (this.playAgainButton.hitTest(mouseX, mouseY)) {
+      globals.state = "playGame";
+    }
+    if (this.homeButton.hitTest(mouseX, mouseY)) {
+      globals.state = "start";
+    }
   }
 }

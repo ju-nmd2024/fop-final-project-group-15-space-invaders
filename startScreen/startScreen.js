@@ -2,6 +2,8 @@
 import { images } from "../game.js";
 import GameScreen from "../gameScreen/gameScreen.js";
 import Button from "./button.js";
+import globals from "../globals.js";
+
 // import InstructionsButton from "./instructionsButton.js";
 
 export default class StartScreen {
@@ -15,10 +17,10 @@ export default class StartScreen {
       1000 / 1.65,
       250,
       60,
-      "Instructions",
-      () => {
-        state = "instructions";
-      }
+      "Instructions"
+      // () => {
+      //   state = "instructions";
+      // }
     );
   }
 
@@ -27,10 +29,16 @@ export default class StartScreen {
     image(images.startBackground, 0, 0, 1000, 1000);
     this.startButton.draw();
     this.instructionsButton.draw();
+    this.mouseClicked();
   }
 
   mouseClicked() {
-    if (this.startButton.hitTest) global.state = "playGame";
+    if (this.startButton.hitTest(mouseX, mouseY)) {
+      globals.state = "playGame";
+    }
+    if (this.instructionsButton.hitTest(mouseX, mouseY)) {
+      globals.state = "instructions";
+    }
   }
 }
 

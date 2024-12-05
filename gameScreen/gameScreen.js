@@ -9,7 +9,7 @@ import Bullet from "./bullet.js";
 import Protection from "./protection.js";
 import Life from "./lives.js";
 import Score from "./score.js";
-import globals from "../startScreen/globals.js";
+import globals from "../globals.js";
 
 export default class GameScreen {
   constructor(x, y) {
@@ -125,7 +125,7 @@ export default class GameScreen {
 
     //Decreasing Lives
     this.checkPlayerCollision();
-    if ((this.lives = 0)) {
+    if (this.lives.length === 0) {
       globals.state = "gameOver";
     }
     // this.increasingScore();

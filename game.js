@@ -2,7 +2,7 @@ import StartScreen from "./startScreen/startScreen.js";
 import InstructionScreen from "./instructionsScreen/instructionScreen.js";
 import GameScreen from "./gameScreen/gameScreen.js";
 import GameOverScreen from "./gameOverScreen/gameOverScreen.js";
-import globals from "./startScreen/globals.js";
+import globals from "./globals.js";
 
 // let state = "playGame";
 let startScreen = new StartScreen(0, 0);
