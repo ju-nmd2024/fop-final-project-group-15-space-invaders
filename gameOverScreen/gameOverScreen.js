@@ -24,6 +24,9 @@ export default class GameOverScreen {
   mouseClicked() {
     if (this.playAgainButton.hitTest(mouseX, mouseY)) {
       globals.state = "playGame";
+      this.score = 0;
+      this.lives = [];
+      this.invaders = [];
     }
     if (this.homeButton.hitTest(mouseX, mouseY)) {
       globals.state = "start";

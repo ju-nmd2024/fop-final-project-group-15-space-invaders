@@ -55,6 +55,9 @@ function draw() {
     gameScreen.draw();
   } else if (globals.state === "gameOver") {
     gameOverScreen.draw();
+    // } else if (globals.state === "resetGame") {
+    //   gameScreen.draw();
+    // }
   }
 }
 
