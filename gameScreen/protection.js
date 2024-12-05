@@ -11,8 +11,6 @@ export default class Protection {
     translate(this.x, this.y);
     fill(144, 144, 144);
     rect(0, 0, this.width, this.height);
-    // rect(0, 0 + 70, this.width, this.height);
-    // rect(0, 0 + 140, this.width, this.height);
     pop();
   }
 }

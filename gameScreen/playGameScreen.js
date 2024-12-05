@@ -1,6 +1,3 @@
-// Links
-//
-
 // Import
 import { images } from "../game.js";
 import Invader from "./invader.js";
@@ -62,23 +59,17 @@ export default class GameScreen {
     this.bullets.forEach((bullet) => {
       bullet.draw(); //drawing the bullet
     });
+    this.scoreText.draw();
+    this.ofScreen();
 
     //Start help Erik, Moving the bullet
     if (keyIsDown(32) && this.bullets.length === 0) {
       this.bullets.push(new Bullet(this.player.x, this.player.y, 5, 10, 10));
     }
 
-    this.ofScreen();
-
     this.enemyBullets.forEach((enemyBullet) => {
       enemyBullet.draw();
     });
-
-    this.scoreText.draw();
-
-    // if (this.checkInvaderCollision) {
-    //   this.score = this.score + 20;
-    // }
 
     // Math random, bullets shooting from the invaders
     if (Math.random() * 100 > 99) {
@@ -128,17 +119,11 @@ export default class GameScreen {
     if (this.lives.length === 0) {
       globals.state = "gameOver";
     }
-    // this.increasingScore();
 
     //Drawing the lives
     this.lives.forEach((lives) => {
       lives.draw();
     });
-    // this.decreasingLives();
-
-    // if (this.playerLives === 0) {
-    //   console.log(gameOver);
-    // }
   } //draw ends
 
   checkInvaderMovement() {
@@ -147,21 +132,22 @@ export default class GameScreen {
     // Check if an invader has reached the edge
     for (let invader of this.invaders) {
       if (invader.x < 0 || invader.x > width - 50) {
-        // You always count at the left, upper corner.
         edgeReached = true;
         break;
       }
-      // } if (invader.y < 0 || invader.y > height - 880){
-      //   let state = "youLoose";
-      // }
     }
 
+    for (let invader of this.invaders) {
+      if (invader.y >= 750) {
+        globals.state = "gameOver";
+      }
+    }
     // Begin help from chatGTP - all code not copied but used as guide/starting point/explanaiton
     // If a edge is reached, switch direction for all invaders
     if (edgeReached) {
       for (let invader of this.invaders) {
         invader.velocity *= -1; // Switch direction
-        invader.y += 5; // Move down the hole row of invaders
+        invader.y += 10; // Move down the hole row of invaders
       }
     }
   }
@@ -181,8 +167,6 @@ export default class GameScreen {
   // End help from chatGTP
 
   //start help Erik Second Year NMD Student
-  //for loops index formula taken from stack overflow
-
   //If invader is shot function
   checkInvaderCollision() {
     for (let [index, bullet] of this.bullets.entries()) {
@@ -190,16 +174,14 @@ export default class GameScreen {
       //Defines
       for (let [indexInvader, invader] of this.invaders.entries()) {
         if (
-          //start taken directly from chatGPT
+          //start taken directly from chatGPT/ Garrit videos
           bullet.x > invader.x &&
           bullet.x < invader.x + invader.width &&
           bullet.y > invader.y &&
           bullet.y < invader.y + invader.height
         ) {
-          //end taken directly from ChatGPT
-          // Help with index from secondyear nmd, student
+          //end taken directly from ChatGPT/ Garrit videos
           this.bullets.splice(index, 1);
-          // console.log(this.bullets);
           this.invaders.splice(indexInvader, 1);
           this.updateScore(); //erik
           break;
@@ -280,7 +262,7 @@ export default class GameScreen {
   updateScore() {
     this.score = this.score + 20;
   }
-  //end help erik??
+  //end help erik
 
   // // Begin help from second year nmd student
 
@@ -330,4 +312,13 @@ export default class GameScreen {
       )
     );
   } //end help from second year,nmd student
+
+  //Help from Linus during Lab
+  resetGame() {
+    globals.state = "playGame";
+    this.score = 0;
+    this.chance = 3;
+    this.invaders = [];
+    console.log("reseGame");
+  } // End Help from Linus during Lab
 }

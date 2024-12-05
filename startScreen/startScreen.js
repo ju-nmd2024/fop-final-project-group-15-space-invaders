@@ -1,10 +1,7 @@
-//Inspired by Alva Norberg, first year NMD student
 import { images } from "../game.js";
-import GameScreen from "../gameScreen/gameScreen.js";
+import GameScreen from "../gameScreen/playGameScreen.js";
 import Button from "./button.js";
 import globals from "../globals.js";
-
-// import InstructionsButton from "./instructionsButton.js";
 
 export default class StartScreen {
   constructor(x, y) {
@@ -18,9 +15,6 @@ export default class StartScreen {
       250,
       60,
       "Instructions"
-      // () => {
-      //   state = "instructions";
-      // }
     );
   }
 
@@ -29,15 +23,17 @@ export default class StartScreen {
     image(images.startBackground, 0, 0, 1000, 1000);
     this.startButton.draw();
     this.instructionsButton.draw();
-    this.mouseClicked();
+    this.mousePressed();
   }
 
-  mouseClicked() {
-    if (this.startButton.hitTest(mouseX, mouseY)) {
-      globals.state = "playGame";
-    }
-    if (this.instructionsButton.hitTest(mouseX, mouseY)) {
-      globals.state = "instructions";
+  mousePressed() {
+    if (mouseIsPressed) {
+      if (this.startButton.hitTest(mouseX, mouseY)) {
+        globals.state = "playGame";
+      }
+      if (this.instructionsButton.hitTest(mouseX, mouseY)) {
+        globals.state = "instructions";
+      }
     }
   }
 }

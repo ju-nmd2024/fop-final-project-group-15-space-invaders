@@ -1,18 +1,18 @@
 import StartScreen from "./startScreen/startScreen.js";
 import InstructionScreen from "./instructionsScreen/instructionScreen.js";
-import GameScreen from "./gameScreen/gameScreen.js";
+import GameScreen from "./gameScreen/playGameScreen.js";
 import GameOverScreen from "./gameOverScreen/gameOverScreen.js";
 import globals from "./globals.js";
+import WinScreen from "./winScreen/winScreen.js";
 
-// let state = "playGame";
 let startScreen = new StartScreen(0, 0);
 let instructionScreen = new InstructionScreen(0, 0);
 let gameScreen = new GameScreen(0, 0);
 let gameOverScreen = new GameOverScreen(0, 0);
+let youWinScreen = new WinScreen(0, 0);
 
 export let images;
 
-// Window
 window.setup = setup;
 window.draw = draw;
 window.preload = preload;
@@ -28,6 +28,7 @@ function preload() {
     startBackground: loadImage("images/spaceinvaders_background.png"),
     instructionsBackground: loadImage("images/spaceinvaders_instructions.png"),
     gameOverBackground: loadImage("images/spaceinvaders_gameOver.png"),
+    youWinBackground: loadImage("images/spaceinvaders_winscreen.png"),
   };
 }
 
@@ -35,16 +36,6 @@ function setup() {
   gameScreen.setup();
   createCanvas(1000, 1000);
 }
-
-//const player = new Player(500, 900, 50, 50, images.player);
-
-//   if (mouseIsPressed) {
-//     if (myButton.hitTest(mouseX, mouseY)) {
-//       startScreen();
-
-// function mouseClicked() {
-//   startScreen.mouseClicked();
-// }
 
 function draw() {
   if (globals.state === "start") {
@@ -55,27 +46,7 @@ function draw() {
     gameScreen.draw();
   } else if (globals.state === "gameOver") {
     gameOverScreen.draw();
-    // } else if (globals.state === "resetGame") {
-    //   gameScreen.draw();
-    // }
+  } else if (globals.state === "youWin") {
+    youWinScreen.draw();
   }
 }
-
-// } else if (state === "instructions") {
-//   rulesScreen();
-// } else if (state === "playGame") {
-//   gameScreen();
-// } else if (state === "gameOver") {
-//   gameOverScreen();
-// } else if (state === "youWin") {
-//   youWinScreen();
-
-// function mouseClicked() {
-//   if (state === "start") {
-//     state = "playGame";
-//   } else if (state === "playGame") {
-//     state = "gameOver";
-//   } else if (state === "gameOver") {
-//     state = "start";
-//   }
-// }

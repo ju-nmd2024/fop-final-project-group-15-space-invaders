@@ -27,18 +27,4 @@ export default class Player {
     image(images.player, 0, 0, 50, 50);
     pop();
   }
-
-  // lives() {
-  // this.playerLives = Player * 3;
-
-  // if (
-  //   bullet.x > this.x &&
-  //   bullet.x < this.x + this.width &&
-  //   bullet.y > this.y &&
-  //   bullet.y < this.y + this.height
-  // ) {
-  //   this.playerLives = true;
-  // } else {
-  //   this.playerLives = false;
-  // }
 }
