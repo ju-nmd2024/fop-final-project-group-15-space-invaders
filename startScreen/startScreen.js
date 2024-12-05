@@ -1,6 +1,7 @@
 //Inspired by Alva Norberg, first year NMD student
 import { images } from "../game.js";
-import Button from "./startButton.js";
+import GameScreen from "../gameScreen/gameScreen.js";
+import Button from "./button.js";
 // import InstructionsButton from "./instructionsButton.js";
 
 export default class StartScreen {
@@ -28,9 +29,9 @@ export default class StartScreen {
     this.instructionsButton.draw();
   }
 
-  // mouseClicked() {
-  //   this.instructionsButton.mouseClicked;
-  // }
+  mouseClicked() {
+    if (this.startButton.hitTest) global.state = "playGame";
+  }
 }
 
 // const startScreen = new StartScreen(0, 0);

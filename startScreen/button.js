@@ -1,3 +1,5 @@
+import globals from "./globals.js";
+
 export default class Button {
   constructor(x, y, width, height, text, callback) {
     this.x = x;
@@ -5,7 +7,7 @@ export default class Button {
     this.width = width;
     this.height = height;
     this.text = text;
-    this.callback = callback;
+    // this.callback = callback;
     this.buttonFillColour = (255, 255, 0);
     this.buttonStrokeColour = (0, 255, 255);
   }
@@ -36,9 +38,10 @@ export default class Button {
     );
   }
 
-  mouseClicked() {
-    if (this.hitTest(mouseX, mouseY)) {
-      this.callback();
-    }
-  }
+  // mouseClicked() {
+  //   if (this.hitTest(mouseX, mouseY)) {
+  //     globals.state =
+  //     this.callback();
+  //   }
+  // }
 }

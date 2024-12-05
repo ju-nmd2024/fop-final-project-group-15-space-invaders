@@ -2,8 +2,9 @@ import StartScreen from "./startScreen/startScreen.js";
 import InstructionScreen from "./instructionsScreen/instructionScreen.js";
 import GameScreen from "./gameScreen/gameScreen.js";
 import GameOverScreen from "./gameOverScreen/gameOverScreen.js";
+import globals from "./startScreen/globals.js";
 
-let state = "playGame";
+// let state = "playGame";
 let startScreen = new StartScreen(0, 0);
 let instructionScreen = new InstructionScreen(0, 0);
 let gameScreen = new GameScreen(0, 0);
@@ -46,13 +47,13 @@ function setup() {
 // }
 
 function draw() {
-  if (state === "start") {
+  if (globals.state === "start") {
     startScreen.draw();
-  } else if (state === "instructions") {
+  } else if (globals.state === "instructions") {
     instructionScreen.draw();
-  } else if (state === "playGame") {
+  } else if (globals.state === "playGame") {
     gameScreen.draw();
-  } else if (state === "gameOver") {
+  } else if (globals.state === "gameOver") {
     gameOverScreen.draw();
   }
 }
